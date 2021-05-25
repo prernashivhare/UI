@@ -1,0 +1,177 @@
+<div>
+  <button (click)=addCustomer() class="refBtn">Add</button>
+  <!-- <button (click)=getCustomer() class="refBtn">Show All</button> -->
+  <input #search type="search" placeholder="Search by Name" > 
+</div>
+
+<!-- Displays form to perform add operation -->
+<div *ngIf="show_dialog">
+  <form [formGroup]="profileForm">
+  
+    <!-- <label>
+      ID:
+      <input type="text" formControlName="id">
+    </label> -->
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td><input type="text" formControlName="name"></td>
+      </tr>
+      <tr>
+          <td>Level:</td>
+          <td><select  formControlName="level"> 
+              <option *ngFor = "let i of level">{{i}}</option>
+           </select>
+          </td>
+      </tr>
+      <tr>
+          <td>Country:</td>
+          <td><select formControlName="country">
+              <option *ngFor = "let i of country">{{i}}</option>
+           </select>
+          </td>
+      </tr>
+      <!-- <tr>
+          <td>Control Point:</td>
+          <td><select formControlName="controlPoint">
+              <option *ngFor = "let i of ctrlPoint">{{i}}</option>
+           </select>
+          </td>
+      </tr> -->
+      <tr>
+          <td>Set Number:</td>
+          <td><input type="text" formControlName="setNumber"></td>
+      </tr>
+      <tr>
+          <td>Contact:</td>
+          <td><input type="text" formControlName="contact"></td>
+      </tr>
+      <tr>
+          <td>Delete Flag:</td>
+          <td><input type="checkbox" formControlName="deleteFlag"></td>
+      </tr>
+    </table>
+  </form>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+  </form>
+</div>
+
+<!-- Displays data in tabular form for search operation -->
+<div *ngIf="show_table">
+  <table>
+    <thead *ngIf="show_header">
+      <tr>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Gender</td>
+        <td>City</td>
+        <td>State</td>
+        <td>Country</td>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor ="let d of customers;">
+        
+        <td><input type="text" value={{d.name}} [(ngModel)]="d.name" /></td>
+        <!-- <td><select  [(ngModel)]="d.age" > 
+            <option *ngFor = "let i of age">{{i}}</option>
+         </select>
+         </td>
+        <td><select  [(ngModel)]="d.gender">
+            <option *ngFor = "let i of gender">{{i}}</option>
+         </select>
+         </td> -->
+        <!-- <td><select [(ngModel)]="d.ctrlPoint">
+            <option *ngFor = "let i of ctrlPoint">{{i}}</option>
+         </select>
+         </td> -->
+        <!-- <td><input type="text" value={{d.setNumber}} [(ngModel)]="d.setNumber" /></td>
+        <td><input type="text" value={{d.contact}} [(ngModel)]="d.contact" /></td>
+        <td><input type="text" value={{d.deleteFlag}} [(ngModel)]="d.deleteFlag" /></td>
+        <button >Edit</button>
+         <button *ngIf="true" (click)="editCustomer(d)">Save</button> -->
+        <!-- <td>{{d.name}}</td> 
+        <td>{{d.level}}</td>
+        <td>{{d.country}}</td>
+        <td>{{d.ctrlPoint}}</td>
+        <td>{{d.setNumber}}</td>
+        <td>{{d.contact}}</td>
+        <td>{{d.deleteFlag}}</td> 
+        <td> <input type="button" value="Edit" (click)="editCustomer(d)"/></td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- 
+<button type="button" class="btn btn-primary-outline pull-right" (click)="createLegalDoc();">
+                              <i class="fa fa-plus"></i> Create Legal Document</button> -->
+
+
+
+
+                              <form class="row g-3 needs-validation" novalidate>
+                                <div class="col-md-4">
+                                  <label for="validationCustom01" class="form-label">First name</label>
+                                  <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="validationCustom02" class="form-label">Last name</label>
+                                  <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="validationCustomUsername" class="form-label">Username</label>
+                                  <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                                    <div class="invalid-feedback">
+                                      Please choose a username.
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="validationCustom03" class="form-label">City</label>
+                                  <input type="text" class="form-control" id="validationCustom03" required>
+                                  <div class="invalid-feedback">
+                                    Please provide a valid city.
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <label for="validationCustom04" class="form-label">State</label>
+                                  <select class="form-select" id="validationCustom04" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option>...</option>
+                                  </select>
+                                  <div class="invalid-feedback">
+                                    Please select a valid state.
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <label for="validationCustom05" class="form-label">Zip</label>
+                                  <input type="text" class="form-control" id="validationCustom05" required>
+                                  <div class="invalid-feedback">
+                                    Please provide a valid zip.
+                                  </div>
+                                </div>
+                                <div class="col-12">
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                    <label class="form-check-label" for="invalidCheck">
+                                      Agree to terms and conditions
+                                    </label>
+                                    <div class="invalid-feedback">
+                                      You must agree before submitting.
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-12">
+                                  <button class="btn btn-primary" type="submit">Submit form</button>
+                                </div>
+                              </form>

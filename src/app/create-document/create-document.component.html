@@ -1,0 +1,74 @@
+<div class="col-12">
+  
+</div>
+<div id="bothForm" class="container">
+  <mat-tab-group>
+      <mat-tab label="General" class="general">
+        <form [formGroup]="generalTabForm">
+          <div class="row mb-12">
+            <label  class="col-sm-2 col-form-label"></label>
+          </div>
+          <div class="row mb-3">
+            <label for="name" class="col-sm-2 col-form-label">Name:</label>
+            <div class="col-sm-6">
+              <input required type="text" class="form-control" formControlName="name" id="name">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="age" class="col-sm-2 col-form-label">Age:</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control" formControlName="age" id="age">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
+            <select formControlName="gender" id="gender" class="col-sm-2">
+              <option selected>Choose...</option>
+              <option *ngFor = "let i of gender">{{i}}</option>
+            </select>
+          </div>
+          <div class="row mb-3">
+            <label for="city" class="col-sm-2 col-form-label">City:</label>
+            <select formControlName="city" id="city" class="col-sm-2">
+              <option selected>Choose...</option>
+              <option *ngFor = "let i of city">{{i}}</option>
+            </select>
+          </div>
+          <div class="row mb-3">
+            <label for="state" class="col-sm-2 col-form-label">State:</label>
+            <select formControlName="state" id="state" class="col-sm-2">
+              <option selected>Choose...</option>
+              <option *ngFor = "let i of state">{{i}}</option>
+            </select>
+          </div>
+          <div class="row mb-3">
+            <label for="country" class="col-sm-2 col-form-label">Country:</label>
+            <select formControlName="country" id="country" class="col-sm-2">
+              <option selected>Choose...</option>
+              <option *ngFor = "let i of country">{{i}}</option>
+            </select>
+          </div>
+        </form>
+        <form [formGroup]="generalTabForm" (ngSubmit)="onSubmit()" class="container">
+          <div class="row mb-12">
+            <a class="col-sm-2"  [routerLink]="" (click)="preview()">Preview</a>
+            <button type="submit" class="btn btn-primary col-sm-2">Save</button>
+          </div>
+          
+          <div class="row mb-12">
+            <label  class="col-sm-2 col-form-label"></label>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Preview" class="tradeCoverage">
+        <form [formGroup]="generalTabForm">
+          <div id="saveForm2">
+            <app-customer-form [formData]=data ></app-customer-form>
+          </div>
+        </form>
+      </mat-tab>
+  </mat-tab-group>
+  </div>
+  
+    
+  
